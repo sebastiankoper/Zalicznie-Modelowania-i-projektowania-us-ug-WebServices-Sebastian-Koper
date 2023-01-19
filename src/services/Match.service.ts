@@ -10,7 +10,7 @@ export class MatchService {
     @InjectModel(MeczMongo.name) private meczModel: Model<MeczDokument>,
   ) {}
 
-  async pobierzWzystkieMeczy(): Promise<DodajMeczDTO[]> {
+  async pobierzWszystkieMecze(): Promise<DodajMeczDTO[]> {
     return await this.meczModel.find();
   }
 

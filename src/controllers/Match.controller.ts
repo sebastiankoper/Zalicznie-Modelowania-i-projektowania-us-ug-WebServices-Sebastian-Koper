@@ -19,35 +19,35 @@ export class MatchController {
   @Get('/wzystkie')
   @ApiResponse({
     status: 200,
-    description: 'The found record',
+    description: 'znaleziony rekord',
     type: MeczMongo,
   })
-  @ApiOperation({ summary: 'Wyszuka wsyztkie meczy' })
-  async pobierzWzystkieMeczy(): Promise<DodajMeczDTO[]> {
-    return this.meczSerwice.pobierzWzystkieMeczy();
+  @ApiOperation({ summary: 'Wyszukaj wszystkie meczy' })
+  async pobierzWszystkieMecze(): Promise<DodajMeczDTO[]> {
+    return this.meczSerwice.pobierzWszystkieMecze();
   }
 
   @Get(':nazwa_zespolu')
   @ApiResponse({
     status: 200,
-    description: 'The found record',
+    description: 'znaleziony rekord',
     type: MeczMongo,
   })
-  @ApiOperation({ summary: 'Fetch specified match' })
+  @ApiOperation({ summary: 'pobierz specialny mecz' })
   async findSpecificMatch(
     @Param() search_data: { team_name: string },
   ): Promise<DodajMeczDTO[]> {
     return this.meczSerwice.wyszukajSpecialnyMecz(search_data.team_name);
   }
-  @ApiOperation({ summary: 'Create match' })
+  @ApiOperation({ summary: 'utwórz mecz' })
   @ApiResponse({
     status: 200,
-    description: 'The found record',
+    description: 'znaleziony rekord',
     type: MeczMongo,
   })
   @Post('/dodaj')
   async dodajMecz(@Body() mecz: DodajMeczDTO): Promise<Mecz[]> {
     await this.meczSerwice.dodajMecz(mecz);
-    return await this.pobierzWzystkieMeczy();
+    return await this.pobierzWszystkieMecze();
   }
 }
